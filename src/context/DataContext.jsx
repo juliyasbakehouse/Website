@@ -14,6 +14,8 @@ function mapProduct(row) {
     imagePosition: row.image_position || undefined,
     tag: row.tag || undefined,
     categories: row.category_ids || [],
+    featured: row.is_featured || false,
+    featuredOrder: row.featured_order || 0,
   }
 }
 
@@ -73,4 +75,11 @@ export function getCategoryItems(products, categoryId) {
 
 export function findProductBySlug(products, slug) {
   return products.find((p) => p.slug === slug) ?? null
+}
+
+export function getFeaturedProducts(products, limit = 3) {
+  return products
+    .filter((p) => p.featured)
+    .sort((a, b) => a.featuredOrder - b.featuredOrder)
+    .slice(0, limit)
 }

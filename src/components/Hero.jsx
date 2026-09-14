@@ -1,12 +1,13 @@
 import Button from './Button.jsx'
 import Reveal from './Reveal.jsx'
+import { asset } from '../lib/asset.js'
 
 export default function Hero() {
   return (
     <section className="relative flex min-h-dvh flex-col bg-(--color-bg) md:flex-row md:items-center md:gap-8 md:px-6 lg:px-12">
       <div className="relative h-[48vh] shrink-0 overflow-hidden md:h-[76vh] md:w-1/2 md:rounded-[2rem]">
         <img
-          src="/gallery/hero-chocolate-cake.png"
+          src={asset('gallery/hero-chocolate-cake.png')}
           alt="A rich chocolate ganache cake with piped rosettes and chocolate shards"
           className="absolute inset-0 h-full w-full object-cover object-top"
         />

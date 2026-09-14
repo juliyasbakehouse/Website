@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Juliya's Bakehouse</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages: https://github.com/rafgraph/spa-github-pages
+      // GitHub Pages has no server-side router, so a direct visit or refresh on a nested
+      // route (e.g. /Website/menu) 404s. This encodes the path into a query string and
+      // redirects to the app root, where the script in index.html decodes it back.
+      var pathSegmentsToKeep = 1 // keep "/Website"
+      var l = window.location
+      l.replace(
+        l.protocol +
+          '//' +
+          l.hostname +
+          (l.port ? ':' + l.port : '') +
+          l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') +
+          '/?/' +
+          l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash,
+      )
+    </script>
+  </head>
+  <body></body>
+</html>

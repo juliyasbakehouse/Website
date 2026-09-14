@@ -2,34 +2,34 @@ import Button from '../components/Button.jsx'
 import Hero from '../components/Hero.jsx'
 import ProductCard from '../components/ProductCard.jsx'
 import Reveal from '../components/Reveal.jsx'
-import { useCatalog } from '../context/DataContext.jsx'
+import TestimonialsCarousel from '../components/TestimonialsCarousel.jsx'
+import { getFeaturedProducts, useCatalog } from '../context/DataContext.jsx'
+import { asset } from '../lib/asset.js'
 
 const PROCESS = [
   {
-    image: '/gallery/process-planning.png',
+    image: asset('gallery/process-planning.png'),
     step: '01',
     title: 'Tell us the occasion',
     desc: 'Share the date, guest count, and flavours you love. We reply within a day with options.',
   },
   {
-    image: '/gallery/process-baking.png',
+    image: asset('gallery/process-baking.png'),
     step: '02',
     title: 'We design & bake',
     desc: 'Every tier is baked fresh and finished by hand, two to three days before your event.',
   },
   {
-    image: '/gallery/process-delivery.png',
+    image: asset('gallery/process-delivery.png'),
     step: '03',
     title: 'Delivered on time',
     desc: 'Chilled delivery or studio pickup, timed to arrive picture-perfect for your event.',
   },
 ]
 
-const FEATURED_SLUGS = ['first-birthday-fairy-cake', 'angel-wings-christening-cake', 'milestone-chapter-cake']
-
 export default function Home() {
   const { products, testimonials } = useCatalog()
-  const featured = FEATURED_SLUGS.map((slug) => products.find((p) => p.slug === slug)).filter(Boolean)
+  const featured = getFeaturedProducts(products, 3)
 
   return (
     <>
@@ -39,7 +39,7 @@ export default function Home() {
         <div className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
           <Reveal>
             <img
-              src="/gallery/golden-drape-50th-cake.png"
+              src={asset('gallery/golden-drape-50th-cake.png')}
               alt="A Bakehouse cake finished by hand"
               className="aspect-4/3 w-full rounded-[2rem] object-cover"
             />
@@ -62,23 +62,25 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-page py-16 md:py-24">
-        <Reveal className="mb-12 flex flex-col items-start justify-between gap-6 md:mb-16 md:flex-row md:items-end">
-          <div>
-            <p className="eyebrow mb-4">Fan favourites</p>
-            <h2 className="text-balance text-3xl text-(--color-ink) md:text-5xl">A few of our favourites</h2>
-          </div>
-          <Button to="/menu" variant="ghost" className="shrink-0">
-            View full menu
-          </Button>
-        </Reveal>
+      {featured.length > 0 && (
+        <section className="container-page py-16 md:py-24">
+          <Reveal className="mb-12 flex flex-col items-start justify-between gap-6 md:mb-16 md:flex-row md:items-end">
+            <div>
+              <p className="eyebrow mb-4">Fan favourites</p>
+              <h2 className="text-balance text-3xl text-(--color-ink) md:text-5xl">A few of our favourites</h2>
+            </div>
+            <Button to="/menu" variant="ghost" className="shrink-0">
+              View full menu
+            </Button>
+          </Reveal>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {featured.map((item, i) => (
-            <ProductCard key={item.slug} item={item} delay={i * 0.08} />
-          ))}
-        </div>
-      </section>
+          <div className="grid gap-6 md:grid-cols-3">
+            {featured.map((item, i) => (
+              <ProductCard key={item.slug} item={item} delay={i * 0.08} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="border-y border-(--color-line) bg-(--color-bg-raised)">
         <div className="container-page py-20 md:py-28">
@@ -102,29 +104,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-page py-20 md:py-28">
-        <Reveal className="mb-12 text-center">
-          <h2 className="text-balance text-3xl text-(--color-ink) md:text-5xl">What clients are saying</h2>
-        </Reveal>
-        <div className="grid gap-6 md:grid-cols-3">
-          {testimonials.map((t, i) => (
-            <Reveal key={t.id} delay={i * 0.08}>
-              <figure className="flex h-full flex-col justify-between rounded-[1.5rem] border border-(--color-line) bg-(--color-bg-raised) p-7">
-                <blockquote className="font-display text-lg leading-snug text-(--color-ink)">
-                  &ldquo;{t.quote}&rdquo;
-                </blockquote>
-                <figcaption className="mt-6 text-sm text-(--color-ink-faint)">
-                  <span className="font-semibold text-(--color-ink-dim)">{t.name}</span> &middot; {t.role}
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      {testimonials.length > 0 && (
+        <section className="container-page py-20 md:py-28">
+          <Reveal className="mb-12 text-center">
+            <h2 className="text-balance text-3xl text-(--color-ink) md:text-5xl">What clients are saying</h2>
+          </Reveal>
+          <TestimonialsCarousel testimonials={testimonials} />
+        </section>
+      )}
 
       <section className="relative overflow-hidden">
         <img
-          src="/gallery/floral-communion-cake.png"
+          src={asset('gallery/floral-communion-cake.png')}
           alt="A finished Bakehouse celebration cake"
           className="absolute inset-0 h-full w-full object-cover"
         />

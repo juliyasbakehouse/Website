@@ -1,4 +1,4 @@
-import { Check } from '@phosphor-icons/react'
+import { Check, Star } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import AdminLayout from '../../components/admin/AdminLayout.jsx'
@@ -24,6 +24,7 @@ const emptyForm = {
   tag: '',
   imagePosition: '',
   categories: [],
+  featured: false,
 }
 
 const fieldCls =
@@ -61,6 +62,7 @@ export default function AdminProductForm() {
       tag: existing.tag || '',
       imagePosition: existing.imagePosition || '',
       categories: existing.categories,
+      featured: existing.featured || false,
     })
     setImagePreview(existing.image || null)
     setSlugTouched(true)
@@ -121,6 +123,9 @@ export default function AdminProductForm() {
       imageUrl = urlData.publicUrl
     }
 
+    const wasFeatured = isEditing ? findProductBySlug(products, editSlug)?.featured : false
+    const featuredOrder = form.featured && !wasFeatured ? products.filter((p) => p.featured).length : undefined
+
     const payload = {
       slug: form.slug,
       name: form.name,
@@ -131,6 +136,8 @@ export default function AdminProductForm() {
       image_url: imageUrl ?? null,
       image_position: form.imagePosition || null,
       category_ids: form.categories,
+      is_featured: form.featured,
+      ...(featuredOrder !== undefined ? { featured_order: featuredOrder } : {}),
     }
 
     const { error: saveError } = isEditing
@@ -266,6 +273,19 @@ export default function AdminProductForm() {
               />
             </label>
           </div>
+
+          <label className="flex items-center gap-3 rounded-lg border border-white/15 bg-[#1b1815] px-4 py-3">
+            <input
+              type="checkbox"
+              checked={form.featured}
+              onChange={(e) => setForm((f) => ({ ...f, featured: e.target.checked }))}
+              className="h-4 w-4 accent-[#cda45e]"
+            />
+            <Star size={16} weight={form.featured ? 'fill' : 'regular'} className="text-[#cda45e]" />
+            <span className="text-sm text-[#cabfab]">
+              Show on homepage <span className="text-[#6b6355]">(under "A few of our favourites" — first 3 marked)</span>
+            </span>
+          </label>
 
           <div>
             <span className={labelCls}>Categories</span>
