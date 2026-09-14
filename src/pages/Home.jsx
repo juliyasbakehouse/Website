@@ -1,34 +1,36 @@
-import { ChatCircleText, ClipboardText, Truck } from '@phosphor-icons/react'
 import Button from '../components/Button.jsx'
 import Hero from '../components/Hero.jsx'
 import ProductCard from '../components/ProductCard.jsx'
 import Reveal from '../components/Reveal.jsx'
-import { CATEGORIES, TESTIMONIALS } from '../data/menu.js'
+import { useCatalog } from '../context/DataContext.jsx'
 
 const PROCESS = [
   {
-    icon: ChatCircleText,
+    image: '/gallery/process-planning.png',
     step: '01',
     title: 'Tell us the occasion',
     desc: 'Share the date, guest count, and flavours you love. We reply within a day with options.',
   },
   {
-    icon: ClipboardText,
+    image: '/gallery/process-baking.png',
     step: '02',
     title: 'We design & bake',
     desc: 'Every tier is baked fresh and finished by hand, two to three days before your event.',
   },
   {
-    icon: Truck,
+    image: '/gallery/process-delivery.png',
     step: '03',
     title: 'Delivered on time',
     desc: 'Chilled delivery or studio pickup, timed to arrive picture-perfect for your event.',
   },
 ]
 
-const featured = CATEGORIES[0].items
+const FEATURED_SLUGS = ['first-birthday-fairy-cake', 'angel-wings-christening-cake', 'milestone-chapter-cake']
 
 export default function Home() {
+  const { products, testimonials } = useCatalog()
+  const featured = FEATURED_SLUGS.map((slug) => products.find((p) => p.slug === slug)).filter(Boolean)
+
   return (
     <>
       <Hero />
@@ -37,9 +39,9 @@ export default function Home() {
         <div className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
           <Reveal>
             <img
-              src="/gallery/cocoa-burst.jpg"
-              alt="Cocoa dust bursting around a fresh chocolate cake tier"
-              className="aspect-4/5 w-full rounded-[2rem] object-cover"
+              src="/gallery/golden-drape-50th-cake.png"
+              alt="A Bakehouse cake finished by hand"
+              className="aspect-4/3 w-full rounded-[2rem] object-cover"
             />
           </Reveal>
           <Reveal delay={0.1}>
@@ -64,7 +66,7 @@ export default function Home() {
         <Reveal className="mb-12 flex flex-col items-start justify-between gap-6 md:mb-16 md:flex-row md:items-end">
           <div>
             <p className="eyebrow mb-4">Fan favourites</p>
-            <h2 className="text-balance text-3xl text-(--color-ink) md:text-5xl">Signature celebration cakes</h2>
+            <h2 className="text-balance text-3xl text-(--color-ink) md:text-5xl">A few of our favourites</h2>
           </div>
           <Button to="/menu" variant="ghost" className="shrink-0">
             View full menu
@@ -73,7 +75,7 @@ export default function Home() {
 
         <div className="grid gap-6 md:grid-cols-3">
           {featured.map((item, i) => (
-            <ProductCard key={item.name} item={item} delay={i * 0.08} />
+            <ProductCard key={item.slug} item={item} delay={i * 0.08} />
           ))}
         </div>
       </section>
@@ -86,10 +88,10 @@ export default function Home() {
           <div className="grid gap-10 md:grid-cols-3 md:gap-8">
             {PROCESS.map((step, i) => (
               <Reveal key={step.step} delay={i * 0.1}>
-                <div className="flex flex-col gap-4 border-t border-(--color-line-strong) pt-6">
-                  <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-4">
+                  <img src={step.image} alt="" className="h-40 w-full object-contain" />
+                  <div className="flex items-center justify-between border-t border-(--color-line-strong) pt-6">
                     <span className="font-display text-2xl text-(--color-gold-dim)">{step.step}</span>
-                    <step.icon size={22} weight="light" className="text-(--color-gold)" />
                   </div>
                   <h3 className="font-display text-xl text-(--color-ink)">{step.title}</h3>
                   <p className="text-sm leading-relaxed text-(--color-ink-faint)">{step.desc}</p>
@@ -105,8 +107,8 @@ export default function Home() {
           <h2 className="text-balance text-3xl text-(--color-ink) md:text-5xl">What clients are saying</h2>
         </Reveal>
         <div className="grid gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 0.08}>
+          {testimonials.map((t, i) => (
+            <Reveal key={t.id} delay={i * 0.08}>
               <figure className="flex h-full flex-col justify-between rounded-[1.5rem] border border-(--color-line) bg-(--color-bg-raised) p-7">
                 <blockquote className="font-display text-lg leading-snug text-(--color-ink)">
                   &ldquo;{t.quote}&rdquo;
@@ -122,8 +124,8 @@ export default function Home() {
 
       <section className="relative overflow-hidden">
         <img
-          src="/gallery/full-reveal.jpg"
-          alt="Finished chocolate rose cake"
+          src="/gallery/floral-communion-cake.png"
+          alt="A finished Bakehouse celebration cake"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/30" />

@@ -1,11 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import ProductCard from '../components/ProductCard.jsx'
 import Reveal from '../components/Reveal.jsx'
-import { CATEGORIES } from '../data/menu.js'
+import { getCategoryItems, useCatalog } from '../context/DataContext.jsx'
 
 export default function Menu() {
-  const [activeId, setActiveId] = useState(CATEGORIES[0].id)
-  const active = CATEGORIES.find((c) => c.id === activeId) ?? CATEGORIES[0]
+  const { categories, products, loading } = useCatalog()
+  const [activeId, setActiveId] = useState(null)
+
+  const nonEmptyCategories = useMemo(
+    () => categories.filter((cat) => getCategoryItems(products, cat.id).length > 0),
+    [categories, products],
+  )
+
+  useEffect(() => {
+    if (!activeId && nonEmptyCategories.length > 0) {
+      setActiveId(nonEmptyCategories[0].id)
+    }
+  }, [activeId, nonEmptyCategories])
+
+  const active = nonEmptyCategories.find((c) => c.id === activeId) ?? nonEmptyCategories[0]
+  const activeItems = active ? getCategoryItems(products, active.id) : []
 
   return (
     <div className="pt-28 pb-24 md:pt-36 md:pb-32">
@@ -22,33 +36,41 @@ export default function Menu() {
         </Reveal>
       </section>
 
-      <div className="container-page mb-10 flex flex-wrap gap-2 md:mb-14">
-        {CATEGORIES.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            onClick={() => setActiveId(cat.id)}
-            className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-colors duration-200 ${
-              activeId === cat.id
-                ? 'border-(--color-gold) bg-(--color-gold) text-[#181109]'
-                : 'border-(--color-line-strong) text-(--color-ink-dim) hover:text-(--color-ink)'
-            }`}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
+      {loading || !active ? (
+        <section className="container-page">
+          <p className="text-(--color-ink-faint)">Loading the menu&hellip;</p>
+        </section>
+      ) : (
+        <>
+          <div className="container-page mb-10 flex flex-wrap gap-2 md:mb-14">
+            {nonEmptyCategories.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setActiveId(cat.id)}
+                className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-colors duration-200 ${
+                  activeId === cat.id
+                    ? 'border-(--color-gold) bg-(--color-gold) text-[#181109]'
+                    : 'border-(--color-line-strong) text-(--color-ink-dim) hover:text-(--color-ink)'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
 
-      <section className="container-page">
-        <Reveal key={active.id} className="mb-8 max-w-xl">
-          <p className="text-sm leading-relaxed text-(--color-ink-faint)">{active.blurb}</p>
-        </Reveal>
-        <div className="grid gap-6 md:grid-cols-3">
-          {active.items.map((item, i) => (
-            <ProductCard key={item.name} item={item} delay={i * 0.06} />
-          ))}
-        </div>
-      </section>
+          <section className="container-page">
+            <Reveal key={active.id} className="mb-8 max-w-xl">
+              <p className="text-sm leading-relaxed text-(--color-ink-faint)">{active.blurb}</p>
+            </Reveal>
+            <div className="grid gap-6 md:grid-cols-3">
+              {activeItems.map((item, i) => (
+                <ProductCard key={item.slug} item={item} delay={i * 0.06} />
+              ))}
+            </div>
+          </section>
+        </>
+      )}
     </div>
   )
 }

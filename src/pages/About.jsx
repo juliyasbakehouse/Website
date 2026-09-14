@@ -46,9 +46,9 @@ export default function About() {
           </Reveal>
           <Reveal delay={0.1}>
             <img
-              src="/gallery/close-pour.jpg"
-              alt="Ganache being poured by hand over a Bakehouse cake"
-              className="aspect-4/5 w-full rounded-[2rem] object-cover"
+              src="/gallery/sage-angel-christening-cake.png"
+              alt="A Bakehouse cake finished by hand in the kitchen"
+              className="aspect-4/3 w-full rounded-[2rem] object-cover"
             />
           </Reveal>
         </div>
@@ -91,22 +91,22 @@ export default function About() {
         <div className="grid gap-4 md:grid-cols-3">
           <Reveal className="md:col-span-2 md:row-span-2">
             <img
-              src="/gallery/tiered-cake-truffles.jpg"
-              alt="Two-tier chocolate cake with gold dragees and truffles"
+              src="/gallery/butterfly-first-birthday-cake.png"
+              alt="A Bakehouse cake from the kitchen"
               className="aspect-4/3 h-full w-full rounded-[1.75rem] object-cover md:aspect-auto"
             />
           </Reveal>
           <Reveal delay={0.08}>
             <img
-              src="/gallery/rose-and-citrus.jpg"
-              alt="Chocolate rose and candied citrus detail on a cake"
+              src="/gallery/vanilla-macarons.png"
+              alt="Macarons from the Bakehouse kitchen"
               className="aspect-4/3 w-full rounded-[1.75rem] object-cover"
             />
           </Reveal>
           <Reveal delay={0.14}>
             <img
-              src="/gallery/cocoa-burst.jpg"
-              alt="Cocoa powder bursting around a fresh cake tier"
+              src="/gallery/christening-cakesicles.png"
+              alt="Christening cakesicles from the Bakehouse kitchen"
               className="aspect-4/3 w-full rounded-[1.75rem] object-cover"
             />
           </Reveal>

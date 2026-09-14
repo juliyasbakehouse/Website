@@ -4,12 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
 
-// The browser's default automatic scroll restoration tries to restore both
-// the page's scroll position AND nested scrollable elements' positions on
-// navigation/reload — which fought with the cake hero's own scroll-snap
-// container, occasionally landing fresh loads mid-animation instead of at
-// the start. Taking manual control here is the standard fix for this class
-// of SPA scroll-restoration conflict.
+// Take manual control of scroll restoration so route changes always start
+// at the top instead of the browser restoring a stale scroll position.
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual'
 }

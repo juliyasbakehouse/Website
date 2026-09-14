@@ -217,8 +217,8 @@ export default function Contact() {
           </div>
           <div className="overflow-hidden rounded-[1.75rem] border border-(--color-line)">
             <img
-              src="/gallery/rose-and-citrus.jpg"
-              alt="Chocolate rose detail on a Bakehouse cake"
+              src="/gallery/kids-birthday-cars.png"
+              alt="A personalized Bakehouse cake"
               className="aspect-square w-full object-cover"
             />
           </div>
