@@ -2,7 +2,6 @@ import { Clock, InstagramLogo, MapPin, Phone } from '@phosphor-icons/react'
 import { useState } from 'react'
 import Button from '../components/Button.jsx'
 import Reveal from '../components/Reveal.jsx'
-import { asset } from '../lib/asset.js'
 
 const OCCASIONS = ['Birthday', 'Wedding', 'Corporate event', 'Anniversary', 'Just because']
 
@@ -213,13 +212,6 @@ export default function Contact() {
                 <span>Orders by call or Instagram DM &mdash; no walk-in counter.</span>
               </li>
             </ul>
-          </div>
-          <div className="overflow-hidden rounded-[1.75rem] border border-(--color-line)">
-            <img
-              src={asset('gallery/kids-birthday-cars.png')}
-              alt="A personalized Bakehouse cake"
-              className="aspect-4/3 w-full object-cover"
-            />
           </div>
         </Reveal>
       </section>
