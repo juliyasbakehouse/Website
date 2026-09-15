@@ -1,25 +1,21 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import ProductCard from '../components/ProductCard.jsx'
 import Reveal from '../components/Reveal.jsx'
 import { getCategoryItems, useCatalog } from '../context/DataContext.jsx'
 
+const ALL = { id: 'all', label: 'All', blurb: 'Everything we bake, for every kind of occasion.' }
+
 export default function Menu() {
   const { categories, products, loading } = useCatalog()
-  const [activeId, setActiveId] = useState(null)
+  const [activeId, setActiveId] = useState(ALL.id)
 
-  const nonEmptyCategories = useMemo(
-    () => categories.filter((cat) => getCategoryItems(products, cat.id).length > 0),
+  const filters = useMemo(
+    () => [ALL, ...categories.filter((cat) => getCategoryItems(products, cat.id).length > 0)],
     [categories, products],
   )
 
-  useEffect(() => {
-    if (!activeId && nonEmptyCategories.length > 0) {
-      setActiveId(nonEmptyCategories[0].id)
-    }
-  }, [activeId, nonEmptyCategories])
-
-  const active = nonEmptyCategories.find((c) => c.id === activeId) ?? nonEmptyCategories[0]
-  const activeItems = active ? getCategoryItems(products, active.id) : []
+  const active = filters.find((c) => c.id === activeId) ?? ALL
+  const activeItems = active.id === ALL.id ? products : getCategoryItems(products, active.id)
 
   return (
     <div className="pt-28 pb-24 md:pt-36 md:pb-32">
@@ -38,7 +34,7 @@ export default function Menu() {
         </Reveal>
       </section>
 
-      {loading || !active ? (
+      {loading ? (
         <section className="container-page">
           <p className="text-(--color-ink-faint)">Loading the menu&hellip;</p>
         </section>
@@ -47,13 +43,13 @@ export default function Menu() {
           <div className="container-page mb-8 md:mb-10">
             <div className="flex flex-col gap-4 border-t border-(--color-line) pt-8 md:flex-row md:items-center md:justify-between md:gap-10">
               <div className="flex flex-wrap gap-2">
-                {nonEmptyCategories.map((cat) => (
+                {filters.map((cat) => (
                   <button
                     key={cat.id}
                     type="button"
                     onClick={() => setActiveId(cat.id)}
                     className={`rounded-full border px-5 py-2.5 text-sm font-medium transition-colors duration-200 ${
-                      activeId === cat.id
+                      active.id === cat.id
                         ? 'border-(--color-gold) bg-(--color-gold) text-[#181109]'
                         : 'border-(--color-line-strong) text-(--color-ink-dim) hover:text-(--color-ink)'
                     }`}
