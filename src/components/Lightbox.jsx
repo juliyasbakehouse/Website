@@ -203,7 +203,7 @@ function LightboxView({ images, index, alt, onClose, onIndexChange }) {
           src={images[index]}
           alt={alt}
           draggable={false}
-          className="absolute inset-0 m-auto h-full w-full object-contain"
+          className="absolute inset-0 m-auto max-h-full max-w-[calc(100%-1.5rem)] rounded-2xl"
           style={{
             transform: `translate(${view.x + swipeX}px, ${view.y}px) scale(${view.scale})`,
             transition: dragging ? 'none' : 'transform 0.25s ease-out',
