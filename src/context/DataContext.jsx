@@ -4,13 +4,15 @@ import { supabase } from '../lib/supabase.js'
 const DataContext = createContext(null)
 
 function mapProduct(row) {
+  const images = row.image_urls?.length ? row.image_urls : row.image_url ? [row.image_url] : []
   return {
     slug: row.slug,
     name: row.name,
     desc: row.description,
     price: row.price,
     serves: row.serves,
-    image: row.image_url || undefined,
+    image: images[0],
+    images,
     imagePosition: row.image_position || undefined,
     tag: row.tag || undefined,
     categories: row.category_ids || [],
