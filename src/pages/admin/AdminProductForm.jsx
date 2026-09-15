@@ -5,6 +5,7 @@ import AdminLayout from '../../components/admin/AdminLayout.jsx'
 import ImageDropzone from '../../components/admin/ImageDropzone.jsx'
 import { findProductBySlug, useCatalog } from '../../context/DataContext.jsx'
 import { useToast } from '../../context/ToastContext.jsx'
+import { compressImage } from '../../lib/compressImage.js'
 import { supabase } from '../../lib/supabase.js'
 
 function slugify(text) {
@@ -107,10 +108,18 @@ export default function AdminProductForm() {
     // No new file chosen: keep the existing image URL, or null if it was removed.
     let imageUrl = imageFile ? undefined : imagePreview
     if (imageFile) {
-      const ext = imageFile.name.split('.').pop()
+      let upload
+      try {
+        upload = await compressImage(imageFile)
+      } catch {
+        upload = imageFile
+      }
+      const ext = upload.name.split('.').pop()
       const path = `${form.slug}-${Date.now()}.${ext}`
-      const { error: uploadError } = await supabase.storage.from('cake-photos').upload(path, imageFile, {
-        cacheControl: '3600',
+      // Filenames are unique per upload, so the file at a path never changes and can be cached for a year.
+      const { error: uploadError } = await supabase.storage.from('cake-photos').upload(path, upload, {
+        cacheControl: '31536000',
+        contentType: upload.type,
         upsert: false,
       })
       if (uploadError) {

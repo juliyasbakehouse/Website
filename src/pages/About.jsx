@@ -47,7 +47,7 @@ export default function About() {
           </Reveal>
           <Reveal delay={0.1}>
             <img
-              src={asset('gallery/sage-angel-christening-cake.png')}
+              src={asset('gallery/sage-angel-christening-cake.webp')}
               alt="A Bakehouse cake finished by hand in the kitchen"
               className="aspect-4/3 w-full rounded-[2rem] object-cover"
             />
@@ -92,21 +92,21 @@ export default function About() {
         <div className="grid gap-4 md:grid-cols-3">
           <Reveal className="md:col-span-2 md:row-span-2">
             <img
-              src={asset('gallery/butterfly-first-birthday-cake.png')}
+              src={asset('gallery/butterfly-first-birthday-cake.webp')}
               alt="A Bakehouse cake from the kitchen"
               className="aspect-4/3 h-full w-full rounded-[1.75rem] object-cover md:aspect-auto"
             />
           </Reveal>
           <Reveal delay={0.08}>
             <img
-              src={asset('gallery/vanilla-macarons.png')}
+              src={asset('gallery/vanilla-macarons.webp')}
               alt="Macarons from the Bakehouse kitchen"
               className="aspect-4/3 w-full rounded-[1.75rem] object-cover"
             />
           </Reveal>
           <Reveal delay={0.14}>
             <img
-              src={asset('gallery/christening-cakesicles.png')}
+              src={asset('gallery/christening-cakesicles.webp')}
               alt="Christening cakesicles from the Bakehouse kitchen"
               className="aspect-4/3 w-full rounded-[1.75rem] object-cover"
             />

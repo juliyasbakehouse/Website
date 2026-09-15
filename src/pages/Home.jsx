@@ -9,19 +9,19 @@ import { asset } from '../lib/asset.js'
 
 const PROCESS = [
   {
-    image: asset('gallery/process-planning.png'),
+    image: asset('gallery/process-planning.webp'),
     step: '01',
     title: 'Tell us the occasion',
     desc: 'Share the date, guest count, and flavours you love. We reply within a day with options.',
   },
   {
-    image: asset('gallery/process-baking.png'),
+    image: asset('gallery/process-baking.webp'),
     step: '02',
     title: 'We design & bake',
     desc: 'Every tier is baked fresh and finished by hand, two to three days before your event.',
   },
   {
-    image: asset('gallery/process-delivery.png'),
+    image: asset('gallery/process-delivery.webp'),
     step: '03',
     title: 'Delivered on time',
     desc: 'Chilled delivery or studio pickup, timed to arrive picture-perfect for your event.',
@@ -40,7 +40,7 @@ export default function Home() {
         <div className="grid items-center gap-12 md:grid-cols-[2fr_3fr] md:gap-16">
           <Reveal>
             <img
-              src={asset('gallery/golden-drape-50th-cake.png')}
+              src={asset('gallery/golden-drape-50th-cake.webp')}
               alt="A Bakehouse cake finished by hand"
               className="aspect-4/3 w-full rounded-[2rem] object-cover"
             />
@@ -120,7 +120,7 @@ export default function Home() {
 
       <section className="relative overflow-hidden">
         <img
-          src={asset('gallery/floral-communion-cake.png')}
+          src={asset('gallery/floral-communion-cake.webp')}
           alt="A finished Bakehouse celebration cake"
           className="absolute inset-0 h-full w-full object-cover"
         />

@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="relative flex flex-col bg-(--color-bg) pt-28 md:flex-row md:pt-32 md:pb-8 md:items-center md:gap-8 md:px-6 lg:px-12">
       <div className="relative h-[56vh] shrink-0 overflow-hidden md:h-[76vh] md:w-1/2 md:rounded-[2rem] md:mask-b-from-70% md:mask-r-from-75%">
         <img
-          src={asset('gallery/hero-chocolate-cake.png')}
+          src={asset('gallery/hero-chocolate-cake.webp')}
           alt="A rich chocolate ganache cake with piped rosettes and chocolate shards"
           className="absolute inset-0 h-full w-full object-cover object-top"
         />
