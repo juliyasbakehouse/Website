@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
+import MobileSlider from './MobileSlider.jsx'
 
 const PAGE_SIZE = 3
 const AUTO_ADVANCE_MS = 7000
@@ -21,48 +22,59 @@ export default function TestimonialsCarousel({ testimonials }) {
   })
 
   return (
-    <div>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={page}
-          initial={reduce ? false : { opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={reduce ? undefined : { opacity: 0, y: -12 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="grid gap-6 md:grid-cols-3"
-        >
-          {items.map((t) => (
-            <figure
-              key={t.id}
-              className="flex h-full flex-col justify-between rounded-[1.5rem] border border-(--color-line) bg-(--color-bg-raised) p-7"
-            >
-              <blockquote className="font-display text-lg leading-snug text-(--color-ink)">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              <figcaption className="mt-6 text-sm text-(--color-ink-faint)">
-                <span className="font-semibold text-(--color-ink-dim)">{t.name}</span> &middot; {t.role}
-              </figcaption>
-            </figure>
+    <>
+      <div className="md:hidden">
+        <MobileSlider label="review">
+          {testimonials.map((t) => (
+            <TestimonialCard key={t.id} t={t} />
           ))}
-        </motion.div>
-      </AnimatePresence>
+        </MobileSlider>
+      </div>
 
-      {pageCount > 1 && (
-        <div className="mt-10 flex justify-center gap-2">
-          {Array.from({ length: pageCount }).map((_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => setPage(i)}
-              aria-label={`Show reviews, set ${i + 1} of ${pageCount}`}
-              aria-current={i === page}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === page ? 'w-6 bg-(--color-gold)' : 'w-2 bg-(--color-line-strong) hover:bg-(--color-gold-dim)'
-              }`}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+      <div className="hidden md:block">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={page}
+            initial={reduce ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, y: -12 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-3 gap-6"
+          >
+            {items.map((t) => (
+              <TestimonialCard key={t.id} t={t} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {pageCount > 1 && (
+          <div className="mt-10 flex justify-center gap-2">
+            {Array.from({ length: pageCount }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setPage(i)}
+                aria-label={`Show reviews, set ${i + 1} of ${pageCount}`}
+                aria-current={i === page}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === page ? 'w-6 bg-(--color-gold)' : 'w-2 bg-(--color-line-strong) hover:bg-(--color-gold-dim)'
+                }`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </>
+  )
+}
+
+function TestimonialCard({ t }) {
+  return (
+    <figure className="flex h-full flex-col justify-between rounded-[1.5rem] border border-(--color-line) bg-(--color-bg-raised) p-7">
+      <blockquote className="font-display text-lg leading-snug text-(--color-ink)">&ldquo;{t.quote}&rdquo;</blockquote>
+      <figcaption className="mt-6 text-sm text-(--color-ink-faint)">
+        <span className="font-semibold text-(--color-ink-dim)">{t.name}</span> &middot; {t.role}
+      </figcaption>
+    </figure>
   )
 }

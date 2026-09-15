@@ -1,5 +1,6 @@
 import Button from '../components/Button.jsx'
 import Hero from '../components/Hero.jsx'
+import MobileSlider from '../components/MobileSlider.jsx'
 import ProductCard from '../components/ProductCard.jsx'
 import Reveal from '../components/Reveal.jsx'
 import TestimonialsCarousel from '../components/TestimonialsCarousel.jsx'
@@ -74,11 +75,13 @@ export default function Home() {
             </Button>
           </Reveal>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {featured.map((item, i) => (
-              <ProductCard key={item.slug} item={item} delay={i * 0.08} />
-            ))}
-          </div>
+          <Reveal>
+            <MobileSlider desktopClassName="md:grid md:grid-cols-3 md:gap-6" label="cake">
+              {featured.map((item, i) => (
+                <ProductCard key={item.slug} item={item} delay={i * 0.08} />
+              ))}
+            </MobileSlider>
+          </Reveal>
         </section>
       )}
 
@@ -87,20 +90,22 @@ export default function Home() {
           <Reveal className="mx-auto mb-16 max-w-lg text-center">
             <h2 className="text-balance text-3xl text-(--color-ink) md:text-5xl">How an order comes together</h2>
           </Reveal>
-          <div className="grid gap-10 md:grid-cols-3 md:gap-8">
-            {PROCESS.map((step, i) => (
-              <Reveal key={step.step} delay={i * 0.1}>
-                <div className="flex flex-col gap-4">
-                  <img src={step.image} alt="" className="h-40 w-full object-contain" />
-                  <div className="flex items-center justify-between border-t border-(--color-line-strong) pt-6">
-                    <span className="font-display text-2xl text-(--color-gold-dim)">{step.step}</span>
+          <Reveal>
+            <MobileSlider desktopClassName="md:grid md:grid-cols-3 md:gap-8" label="step">
+              {PROCESS.map((step, i) => (
+                <Reveal key={step.step} delay={i * 0.1}>
+                  <div className="flex flex-col gap-4">
+                    <img src={step.image} alt="" className="h-40 w-full object-contain" />
+                    <div className="flex items-center justify-between border-t border-(--color-line-strong) pt-6">
+                      <span className="font-display text-2xl text-(--color-gold-dim)">{step.step}</span>
+                    </div>
+                    <h3 className="font-display text-xl text-(--color-ink)">{step.title}</h3>
+                    <p className="text-sm leading-relaxed text-(--color-ink-faint)">{step.desc}</p>
                   </div>
-                  <h3 className="font-display text-xl text-(--color-ink)">{step.title}</h3>
-                  <p className="text-sm leading-relaxed text-(--color-ink-faint)">{step.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+                </Reveal>
+              ))}
+            </MobileSlider>
+          </Reveal>
         </div>
       </section>
 

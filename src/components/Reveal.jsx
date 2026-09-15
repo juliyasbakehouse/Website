@@ -1,4 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react'
+import { useContext } from 'react'
+import { SliderContext } from './MobileSlider.jsx'
 
 export default function Reveal({
   children,
@@ -9,7 +11,9 @@ export default function Reveal({
   amount = 0.1,
   once = true,
 }) {
-  const reduce = useReducedMotion()
+  const prefersReduced = useReducedMotion()
+  const inMobileSlider = useContext(SliderContext)
+  const reduce = prefersReduced || inMobileSlider
   const MotionTag = motion[Tag] ?? motion.div
 
   return (
