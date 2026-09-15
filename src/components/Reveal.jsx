@@ -6,7 +6,7 @@ export default function Reveal({
   delay = 0,
   y = 24,
   className = '',
-  amount = 0.3,
+  amount = 0.1,
   once = true,
 }) {
   const reduce = useReducedMotion()

@@ -35,7 +35,7 @@ export default function Home() {
     <>
       <Hero />
 
-      <section className="container-page py-24 md:py-32">
+      <section className="container-page py-16 md:py-20">
         <div className="grid items-center gap-12 md:grid-cols-[2fr_3fr] md:gap-16">
           <Reveal>
             <img

@@ -4,7 +4,7 @@ import { asset } from '../lib/asset.js'
 
 export default function Hero() {
   return (
-    <section className="relative flex flex-col bg-(--color-bg) md:min-h-dvh md:flex-row md:items-center md:gap-8 md:px-6 lg:px-12">
+    <section className="relative flex flex-col bg-(--color-bg) md:flex-row md:pt-24 md:pb-8 md:items-center md:gap-8 md:px-6 lg:px-12">
       <div className="relative h-[56vh] shrink-0 overflow-hidden md:h-[76vh] md:w-1/2 md:rounded-[2rem] md:mask-b-from-70% md:mask-r-from-75%">
         <img
           src={asset('gallery/hero-chocolate-cake.png')}
