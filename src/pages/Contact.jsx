@@ -34,7 +34,7 @@ export default function Contact() {
     const nextErrors = validate(form)
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length === 0) {
-      // NOTE: no backend is wired up yet — connect this to an email/service
+      // NOTE: no backend is wired up yet; connect this to an email/service
       // endpoint (e.g. Formspree, a serverless function) before launch.
       setSubmitted(true)
     }
@@ -188,7 +188,7 @@ export default function Contact() {
             <ul className="flex flex-col gap-4 text-sm text-(--color-ink-dim)">
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="mt-0.5 shrink-0 text-(--color-gold)" />
-                <span>Mulanthuruthy, Kochi, Kerala &mdash; home bakery, orders only</span>
+                <span>Mulanthuruthy, Kochi, Kerala. Home bakery, orders only.</span>
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={18} className="mt-0.5 shrink-0 text-(--color-gold)" />
@@ -209,7 +209,7 @@ export default function Contact() {
               </li>
               <li className="flex items-start gap-3">
                 <Clock size={18} className="mt-0.5 shrink-0 text-(--color-gold)" />
-                <span>Orders by call or Instagram DM &mdash; no walk-in counter.</span>
+                <span>Orders by call or Instagram DM. No walk-in counter.</span>
               </li>
             </ul>
           </div>

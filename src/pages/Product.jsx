@@ -79,7 +79,7 @@ export default function Product() {
               </Button>
             </div>
             <p className="mt-6 text-xs leading-relaxed text-(--color-ink-faint)">
-              Price is a starting guide &mdash; custom sizes, flavours, and dietary swaps are always available on
+              Price is a starting guide. Custom sizes, flavours, and dietary swaps are always available on
               request.
             </p>
           </Reveal>

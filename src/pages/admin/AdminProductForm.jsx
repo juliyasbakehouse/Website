@@ -292,7 +292,7 @@ export default function AdminProductForm() {
             />
             <Star size={16} weight={form.featured ? 'fill' : 'regular'} className="text-[#cda45e]" />
             <span className="text-sm text-[#cabfab]">
-              Show on homepage <span className="text-[#6b6355]">(under "A few of our favourites" — first 3 marked)</span>
+              Show on homepage <span className="text-[#6b6355]">(under "A few of our favourites", first 3 marked)</span>
             </span>
           </label>
 

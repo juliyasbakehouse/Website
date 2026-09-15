@@ -41,7 +41,7 @@ export default function About() {
             <p className="mt-6 max-w-md text-base leading-relaxed text-(--color-ink-dim)">
               Juliya&rsquo;s Bakehouse started as a home kitchen experiment: could a cake made entirely by hand,
               without shortcuts, still be ready in time for a Tuesday birthday party? Years later, that same
-              question still shapes every order &mdash; small batches, real ingredients, and enough time to finish
+              question still shapes every order: small batches, real ingredients, and enough time to finish
               every detail properly.
             </p>
           </Reveal>

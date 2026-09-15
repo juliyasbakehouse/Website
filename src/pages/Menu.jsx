@@ -30,7 +30,7 @@ export default function Menu() {
             Cakes, pastries, and custom commissions
           </h1>
           <p className="mt-5 max-w-lg text-base text-(--color-ink-dim)">
-            Every item below is baked to order. Prices are a starting guide &mdash; custom sizes, flavours, and
+            Every item below is baked to order. Prices are a starting guide. Custom sizes, flavours, and
             dietary swaps are always available on request.
           </p>
         </Reveal>

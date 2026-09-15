@@ -50,7 +50,7 @@ export default function Footer() {
           <ul className="flex flex-col gap-3 text-sm text-(--color-ink-dim)">
             <li className="flex items-start gap-2.5">
               <MapPin size={16} className="mt-0.5 shrink-0 text-(--color-gold)" />
-              <span>Mulanthuruthy, Kochi, Kerala &mdash; home bakery, orders only</span>
+              <span>Mulanthuruthy, Kochi, Kerala. Home bakery, orders only.</span>
             </li>
             <li className="flex items-start gap-2.5">
               <Phone size={16} className="mt-0.5 shrink-0 text-(--color-gold)" />
@@ -76,7 +76,7 @@ export default function Footer() {
       <div className="border-t border-(--color-line)">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-(--color-ink-faint) md:flex-row">
           <p>&copy; {new Date().getFullYear()} Juliya&rsquo;s Bakehouse. All rights reserved.</p>
-          <p>Menu items and prices are illustrative &mdash; DM or call to confirm current offerings.</p>
+          <p>Menu items and prices are illustrative. DM or call to confirm current offerings.</p>
         </div>
       </div>
     </footer>
