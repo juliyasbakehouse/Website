@@ -36,7 +36,7 @@ export default function Home() {
       <Hero />
 
       <section className="container-page py-24 md:py-32">
-        <div className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
+        <div className="grid items-center gap-12 md:grid-cols-[2fr_3fr] md:gap-16">
           <Reveal>
             <img
               src={asset('gallery/golden-drape-50th-cake.png')}
