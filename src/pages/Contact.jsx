@@ -42,22 +42,20 @@ export default function Contact() {
   }
 
   return (
-    <div className="pt-28 pb-24 md:pt-36 md:pb-32">
-      <section className="container-page mb-16 md:mb-20">
+    <div className="pt-28 pb-20 md:pt-36 md:pb-28">
+      <section className="container-page grid gap-12 md:grid-cols-[1.2fr_1fr] md:gap-16 lg:gap-20">
         <Reveal>
-          <p className="eyebrow mb-4">Order &amp; contact</p>
-          <h1 className="max-w-2xl text-balance text-4xl leading-tight text-(--color-ink) md:text-6xl">
-            Let&rsquo;s plan your cake
-          </h1>
-          <p className="mt-5 max-w-lg text-base text-(--color-ink-dim)">
-            Tell us your date, guest count, and flavours in mind. We reply to every enquiry within one business
-            day.
-          </p>
-        </Reveal>
-      </section>
+          <div className="mb-10">
+            <p className="eyebrow mb-4">Order &amp; contact</p>
+            <h1 className="text-balance text-4xl leading-tight text-(--color-ink) md:text-6xl">
+              Let&rsquo;s plan your cake
+            </h1>
+            <p className="mt-5 max-w-lg text-base text-(--color-ink-dim)">
+              Tell us your date, guest count, and flavours in mind. We reply to every enquiry within one business
+              day.
+            </p>
+          </div>
 
-      <section className="container-page grid gap-12 md:grid-cols-[1.2fr_1fr] md:gap-20">
-        <Reveal>
           {submitted ? (
             <div className="rounded-[1.75rem] border border-(--color-gold)/40 bg-(--color-bg-raised) p-10 text-center">
               <h2 className="font-display text-2xl text-(--color-ink)">Thank you, {form.name.split(' ')[0]}!</h2>
@@ -185,7 +183,7 @@ export default function Contact() {
           )}
         </Reveal>
 
-        <Reveal delay={0.1} className="flex flex-col gap-6">
+        <Reveal delay={0.1} className="flex flex-col gap-6 self-start md:sticky md:top-32">
           <div className="rounded-[1.75rem] border border-(--color-line) bg-(--color-bg-raised) p-7">
             <p className="eyebrow mb-5">Reach us directly</p>
             <ul className="flex flex-col gap-4 text-sm text-(--color-ink-dim)">
@@ -220,7 +218,7 @@ export default function Contact() {
             <img
               src={asset('gallery/kids-birthday-cars.png')}
               alt="A personalized Bakehouse cake"
-              className="aspect-square w-full object-cover"
+              className="aspect-4/3 w-full object-cover"
             />
           </div>
         </Reveal>
